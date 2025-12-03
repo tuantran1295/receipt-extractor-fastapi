@@ -1,140 +1,304 @@
-# Full Stack Engineer
-## Take Home Assessment (Receipt Exractor)
+# Receipt Extractor - Full Stack Application
+
+A full-stack application that automatically extracts information from receipt images using AI. The application consists of a NestJS backend that processes receipt images using OpenAI's GPT-4o vision model, and a React frontend that provides an intuitive interface for uploading receipts and viewing extracted details.
+
+## Features
+
+### Backend
+- **Receipt Image Processing**: Accepts receipt images (JPG, JPEG, PNG) and extracts structured data
+- **AI-Powered Extraction**: Uses OpenAI GPT-4o to extract receipt details (date, currency, vendor, items, tax, total)
+- **Data Persistence**: Stores extracted receipt data in SQLite database
+- **Image Storage**: Saves uploaded images to the `uploads/` directory
+- **RESTful API**: Clean API endpoints for receipt extraction
+- **Comprehensive Testing**: Unit tests covering all scenarios
+
+### Frontend
+- **File Upload**: Drag-and-drop or file picker interface
+- **File Validation**: Validates file types and size (max 10MB)
+- **File Preview**: Preview selected receipt image before submission
+- **Loading States**: Animated loading spinner and progress bar
+- **Error Handling**: User-friendly error messages with retry functionality
+- **Results Display**: Beautiful layout showing extracted receipt details
+- **Responsive Design**: Works seamlessly on desktop and mobile devices
+
+## Prerequisites
 
-**\* Please read this entire document carefully before beginning the assessment. \***
+- **Node.js v18+** and **npm v10+**
+- **OpenAI API key** (get one from https://platform.openai.com/api-keys)
+- Two terminal windows (one for backend, one for frontend)
 
-## About
+## Quick Start
 
-Congratulations on making it to the next phase of interviewing with Sleek!
+### 1. Clone the Repository
 
-For this portion of the interview, you will work on a small take home assessment to demonstrate and showcase your knowledge and skills. The assessment will cover both backend and frontend development, and should take _approximately 2.5 hours_ to complete.
+```bash
+git clone <repository-url>
+cd fullstack-receipt-extractor-tuantran1295
+```
 
-While working on the assessment, you can do all of the work in a single sitting, or spread it out over a couple of days.
+### 2. Set Up the Backend
 
-## Assessment project
+```bash
+# Navigate to backend directory
+cd engineer-assessment-backend/
 
-For this assessment, you will be building the backend and frontend of a basic application that accepts images of receipts, uses an AI model of your choosing to extract the details of the receipts, and then displays the details in a simple frontend. You will also be required to implement unit tests for some of your backend code.
+# Set Node.js version (if using nvm)
+nvm install && nvm use
 
-- For full details and requirements of the **_backend assessment_**:
-  - [**Click here**](/engineer-assessment-backend/requirements-backend.md), or 
-  - Go to the `engineer-assessment-backend/requirements-backend.md` document
+# Install dependencies
+npm install
+```
 
-* For full details and requirements of the **_frontend assessment_**:
-   - [**Click here**](/engineer-assessment-frontend/requirements-frontend.md), or
-   - Go to the `engineer-assessment-frontend/requirements-frontend.md` document
+#### Create .env File
 
-While working on the project, you will have the freedom to choose any _unspecified_ requirements, such as (but not limited to):
+You need to create a `.env` file in the `engineer-assessment-backend/` directory with your OpenAI API key.
 
-- File structure
-
-- Data models
-
-- Helper functions
-
-- Data validation
-
-- Error handling
-
-- AI model and API/SDK
-
-- UI/UX elements
-
-You may use any AI model, API, or SDK of your choice to extract receipt data. This can include third-party services or open-source models. Please ensure that your approach is well-documented.
-
-This is your project! While we have outlined the base functionality required for submission, we encourage you to demonstrate your own ideas, structure, and decisions throughout the project.
-
-## Taking the assessment
-
-The assessment has two components: a backend in NestJS, and a frontend in React.
-
-We provide functioning boilerplate code of each component. The boilerplate code is _just enough_ to spin up with placeholder functionality. Everybody will start from the same place, and it is up to you to complete the assessment how you see fit.
-
-### Project Initialization
-
-1. Clone this repository locally
-
-2. Follow the instructions within each project's README to install dependencies and spin-up the project
-
-   - [Backend README](/engineer-assessment-backend/README.md)
-
-   - [Frontend README](/engineer-assessment-frontend/README.md)
-
-### Project Work
-
-1. Create a new working branch (e.g. `git checkout -b working-branch`)
-
-2. Complete all of your work in the working branch that you created above
-
-   - All backend work should be within `engineer-assessment-backend/`
-
-   - All frontend work should be within `engineer-assessment-frontend/`
-
-2. Push commits to your remote working branch as often as you need
-
-## Assessment Submission
-
-There are **TWO** parts to submitting your completed assessment: 
-
-1. **Submit your code via GitHub**
-
-   a. Create a PR for your working branch into `main` branch
-
-   b. Merge the above PR
-
-   **⚠️ IMPORTANT: The above action is a one-time submission event. Do not open a PR until you are ready to submit your project.**
-
-   _Please make sure your final submission includes updated_ `README` _files within the associated directories with instructions on how to run your project, any dependencies, and any other relevant details for reviewers. The repository will be private and not shared with anyone outside of Sleek._
-
-2. **Fill-out and submit the Google form provided to you, with ALL the required information**
-
-   _Note: We ask that you include a short demo video with your submission, showing the final working product, explaining the functionality and highlighting any important code/design choices you might have made. Please limit the video to 5 minutes max. You can make recordings up-to 5 minutes with a free_ [_Loom_](https://www.loom.com/) _account._ **_DO NOT submit your video on Youtube or other publicly-accessible sites._**
-
-### Submission Checklist
-
-- [ ] Code changes successfully merged into main branch
-
-- [ ] Google form submission with the following details:
-
-  - [ ] Email
-
-  - [ ] Full name
-
-  - [ ] Repository URL
-
-  - [ ] Link to demo video
-
-  - [ ] Use of AI tools in development
-
-  - [ ] Feedback on the assessment (optional)
-
-## Be prepared to discuss your submission
-
-After submitting your completed assessment, there will be a 1-hour follow up technical interview. We will be asking you some questions about the work you’ve submitted, so make sure you understand it. Additionally, we will ask you to add or update functionality in this same project, so **DO NOT** delete your local branches after submission.
-
-## Tips
-
-#### Treat this like production code
-
-Even though this is a short assessment, we expect you to treat it as though you were working on a production-level codebase. We want to see how you organize your work, what your thought process is, what libraries you might use, your use of Typescript, and so on. _A random number generator is not an appropriate way to generate unique IDs._
-
-#### AI tools
-
-We encourage the use of AI developer tools - such as ChatGPT, GitHub Copilot, or Cursor - **_to enhance your development process_**, but not to replace it.
-
-That said, this is a coding assessment, and we expect you to demonstrate your own technical ability. AI can help you be more efficient, but it’s important that:
-
-- _You fully understand the code you submit_
-
-- _You can explain your decisions and logic during the review_
-
-- _Your submission reflects your own problem-solving skills, not just copied output_
-
-_Rely on AI like a smart assistant — not a substitute. Strong developers use tools to amplify their own skills, not to fill in for them._
-
-## Contact for support
-
-If you encounter any issues with accessing the repositories, setting up the project, or have any other questions, please reach out to:
-
-Michael Arsenault
-
-michael.arsenault@sleek.com
+**Option 1: Using command line (Linux/Mac)**
+```bash
+cd engineer-assessment-backend/
+cat > .env << EOF
+OPENAI_API_KEY=your_openai_api_key_here
+PORT=3000
+EOF
+```
+
+**Option 2: Using command line (Windows PowerShell)**
+```powershell
+cd engineer-assessment-backend/
+@"
+OPENAI_API_KEY=your_openai_api_key_here
+PORT=3000
+"@ | Out-File -FilePath .env -Encoding utf8
+```
+
+**Option 3: Manual creation**
+1. Navigate to the `engineer-assessment-backend/` directory
+2. Create a new file named `.env` (make sure it starts with a dot)
+3. Add the following content:
+   ```
+   OPENAI_API_KEY=your_openai_api_key_here
+   PORT=3000
+   ```
+4. Save the file
+
+**Important**: 
+- Replace `your_openai_api_key_here` with your actual OpenAI API key
+- Get your API key from https://platform.openai.com/api-keys
+- The `.env` file should be in the `engineer-assessment-backend/` directory (same level as `package.json`)
+
+### 3. Set Up the Frontend
+
+```bash
+# Navigate to frontend directory (from project root)
+cd engineer-assessment-frontend/
+
+# Set Node.js version (if using nvm)
+nvm install && nvm use
+
+# Install dependencies
+npm install
+```
+
+## Running the Application
+
+### Start the Backend
+
+In the first terminal window:
+
+```bash
+cd engineer-assessment-backend/
+npm run start:dev
+```
+
+The backend server will start on `http://localhost:3000`. You should see:
+```
+[Nest] INFO [NestFactory] Starting Nest application...
+[Nest] INFO [InstanceLoader] AppModule dependencies initialized
+[Nest] INFO [NestApplication] Nest application successfully started
+```
+
+### Start the Frontend
+
+In the second terminal window:
+
+```bash
+cd engineer-assessment-frontend/
+npm run dev
+```
+
+The frontend will start on a port (typically `http://localhost:5173/`). The terminal will display the exact URL.
+
+### Access the Application
+
+1. Open your browser and navigate to the frontend URL (e.g., `http://localhost:5173/`)
+2. You should see the Receipt Extractor landing page
+3. Upload a receipt image (JPG, JPEG, or PNG) to extract details
+
+## Usage
+
+1. **Upload a Receipt**: Click "Select File" or drag and drop a receipt image
+2. **Preview**: Review the selected file in the preview screen
+3. **Extract**: Click "Extract Details" to process the receipt
+4. **View Results**: See the extracted details including date, currency, vendor, items, tax, and total
+5. **Extract Another**: Click "Extract Another Receipt" to start over
+
+## API Endpoints
+
+### Health Check
+```bash
+GET http://localhost:3000/
+```
+
+### Extract Receipt Details
+```bash
+POST http://localhost:3000/extract-receipt-details
+Content-Type: multipart/form-data
+Body: Form data with field name "image" containing the image file
+```
+
+**Response Example:**
+```json
+{
+  "id": "uuid-string",
+  "date": "2024-01-15",
+  "currency": "USD",
+  "vendor_name": "Store Name",
+  "receipt_items": [
+    {
+      "item_name": "Item 1",
+      "item_cost": 10.50
+    }
+  ],
+  "tax": 1.50,
+  "total": 17.25,
+  "image_url": "/uploads/uuid-filename.jpg"
+}
+```
+
+## Testing
+
+### Backend Tests
+
+```bash
+cd engineer-assessment-backend/
+npm test              # Run unit tests
+npm run test:watch    # Run tests in watch mode
+npm run test:cov      # Run tests with coverage
+```
+
+### Frontend Linting
+
+```bash
+cd engineer-assessment-frontend/
+npm run lint
+```
+
+## Build for Production
+
+### Backend
+
+```bash
+cd engineer-assessment-backend/
+npm run build
+npm run start:prod
+```
+
+### Frontend
+
+```bash
+cd engineer-assessment-frontend/
+npm run build        # Creates optimized build in dist/
+npm run preview      # Preview production build locally
+```
+
+## Project Structure
+
+```
+fullstack-receipt-extractor-tuantran1295/
+├── engineer-assessment-backend/     # NestJS backend
+│   ├── src/
+│   │   ├── receipt.controller.ts   # Receipt extraction endpoint
+│   │   ├── receipt.service.ts       # Business logic
+│   │   └── receipt.entity.ts        # Database entity
+│   ├── uploads/                     # Stored receipt images
+│   └── receipts.db                  # SQLite database (auto-created)
+│
+├── engineer-assessment-frontend/    # React frontend
+│   └── src/
+│       ├── App.tsx                  # Main application component
+│       ├── main.tsx                 # Entry point
+│       └── index.css                # Styles
+│
+└── sample-receipts/                 # Sample receipt images for testing
+```
+
+## Technologies Used
+
+### Backend
+- **NestJS**: Framework for building efficient Node.js server-side applications
+- **TypeORM**: ORM for database operations
+- **SQLite**: Lightweight database for data persistence
+- **OpenAI API**: GPT-4o vision model for receipt extraction
+- **Multer**: File upload handling
+- **Jest**: Testing framework
+
+### Frontend
+- **React 19**: UI library for building the interface
+- **TypeScript**: Type-safe JavaScript
+- **Vite**: Fast build tool and development server
+- **CSS3**: Modern styling with animations and gradients
+
+## Troubleshooting
+
+### Backend Issues
+
+1. **"OPENAI_API_KEY is not defined"**
+   - Ensure you have created a `.env` file in `engineer-assessment-backend/`
+   - Check that the `.env` file contains your OpenAI API key
+
+2. **"Cannot connect to database"**
+   - The SQLite database is created automatically on first run
+   - Ensure the application has write permissions in the project directory
+
+3. **"File upload fails"**
+   - Check file size (max 10MB)
+   - Ensure file format is JPG, JPEG, or PNG
+   - Verify the `uploads/` directory exists and is writable
+
+4. **"AI extraction fails"**
+   - Verify your OpenAI API key is valid
+   - Check your OpenAI account has sufficient credits
+   - Ensure the image is clear and readable
+
+### Frontend Issues
+
+1. **"Failed to fetch" or CORS errors**
+   - Ensure the backend is running on `http://localhost:3000`
+   - Verify CORS is enabled in the backend (should be enabled by default)
+   - Check browser console for detailed error messages
+
+2. **Image not displaying in results**
+   - Verify the backend is serving static files from `/uploads/` directory
+   - Check that the `image_url` in the response is correct
+   - Ensure backend CORS allows image requests
+
+3. **Port already in use**
+   - Vite will automatically try the next available port
+   - Check the terminal output for the actual port number
+
+## Environment Variables
+
+### Backend (.env file in `engineer-assessment-backend/`)
+
+| Variable | Description | Required |
+|----------|-------------|----------|
+| `OPENAI_API_KEY` | Your OpenAI API key | Yes |
+| `PORT` | Server port (default: 3000) | No |
+
+## Sample Receipts
+
+The project includes a `sample-receipts/` directory containing various receipt images that you can use for testing during development.
+
+## License
+
+UNLICENSED
